@@ -2,13 +2,11 @@
     box-sizing: border-box;
 }
 
-.body {
-    background-color: yellowgreen;
 
-}
 
 .title {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 
@@ -23,6 +21,12 @@
   border-radius: .25rem;
   background-color: white;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 500px){
+  .containers {
+    margin: 0rem auto !important;
+  }
 }
 
 .label {
@@ -112,6 +116,7 @@
   border-radius: .25rem;
 
   font-family: "Madimi One", sans-serif;
+  text-align: center;
 
   & a {
     color: white;
@@ -120,4 +125,5 @@
 
 .link-to-login {
     color: yellowgreen !important;
+    text-decoration: underline !important;
 }

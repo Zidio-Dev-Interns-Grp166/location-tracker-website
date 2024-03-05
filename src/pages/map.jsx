@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 
-const MapWithTracking = () => {
+const MapWithTracking =  () => {
   const [map, setMap] = useState(null);
   const [position, setPosition] = useState(null);
   const [history, setHistory] = useState([]);
   const [isTrackingPaused, setIsTrackingPaused] = useState(false);
   const watchIdRef = useRef(null);
+  const navigate = useNavigate();
 
   // Initialize the map
   useEffect(() => {
@@ -34,7 +35,7 @@ const MapWithTracking = () => {
 
       // Add current position to history
       setHistory(prevHistory => [...prevHistory, { latitude, longitude, timestamp: new Date() }]);
-
+      
       // Check if tracking is paused
       if (!isTrackingPaused) {
         map.setView([latitude, longitude], 13);
@@ -73,29 +74,31 @@ const MapWithTracking = () => {
     setIsTrackingPaused(prevState => !prevState);
   };
 
+  const gotoHistory = () => navigate("/history");
+  const gotoHome = () => navigate("/");
+
+  
+
+
   return (
     <div className='map-content'>
       <div id="map" style={{ width: '100%', height: '400px' }} />
       <div className='tracking-content'>
-        <button className='tracking-btn' onClick={startTracking}>Start Tracking</button>
-        <button className='tracking-btn' onClick={stopTracking}>Stop Tracking</button>
+        <button className='tracking-btn' onClick={startTracking}>Start</button>
+        <button className='tracking-btn' onClick={stopTracking}>Stop</button>
         <button className='tracking-btn' onClick={togglePauseTracking}>
-          {isTrackingPaused ? 'Resume Tracking' : 'Pause Tracking'}
+          {isTrackingPaused ? 'Resume' : 'Pause'}
         </button>
       </div>
-      <div className='previous-locations'> 
-        view history
-        <div className='inner-content'>
-                <h2>Location History</h2>
-                <ul>
-                    {history.map((item, index) => (
-                        <li key={index}>
-                        Latitude: {item.latitude}, Longitude: {item.longitude}, Timestamp: {item.timestamp.toLocaleString()}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+      <div className='tracking-content'>
+        <button onClick={gotoHistory}  className='tracking-btn '> 
+            view history
+        </button>
+        <button onClick={gotoHome}  className='tracking-btn '> 
+            Home
+        </button>
       </div>
+      
     </div>
   );
 };

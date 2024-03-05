@@ -30,7 +30,9 @@ const Navbar = () => {
     <div className="header">
       <div className="header-left">
         <div className="header-logo-container">
-          <img src={logo} alt="Logo" height={50} />
+          <NavLink to='/'>
+            <img src={logo} alt="Logo" height={50} />
+          </NavLink>
         </div>
 
 
@@ -38,7 +40,7 @@ const Navbar = () => {
           <NavLink to="/">
             <li>Home</li>
           </NavLink>
-          <NavLink to="#">
+          <NavLink to="/map">
             <li>Map</li>
           </NavLink>
           <NavLink to="#">

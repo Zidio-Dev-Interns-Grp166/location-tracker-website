@@ -1,79 +1,105 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
-import './signUp.css'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import './signUp.css';
 
-const RegisterForm = ({ onRegister }) => {
-  const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
+const Signup = ({ onRegister }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // If form is valid, call onRegister callback with form data
-      onRegister(formData);
-    }
+      e.preventDefault();
+      validateForm();
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
   };
 
   const validateForm = () => {
-    let isValid = true;
-    const errors = {};
+  let isValid = true;
+  const errors = {};
 
-    if (!formData.email.trim()) {
+      if(!username.trim()){
+          errors.username = "please enter your username";
+          isValid =  false;
+      }
+
+      if (!email.trim()) {
       errors.email = 'Email is required';
       isValid = false;
-    }
+      }
 
-    if (!formData.password.trim()) {
+      if (!password.trim()) {
       errors.password = 'Password is required';
       isValid = false;
-    }
+      }
 
-    if (formData.password !== formData.confirmPassword) {
+      if (password !== confirmPassword) {
       errors.confirmPassword = 'Passwords do not match';
       isValid = false;
-    }
+      }
 
-    setErrors(errors);
-    return isValid;
+      setErrors(errors);
+      return isValid;
   };
 
-  return (
-    
-    <div class="containers">
-        <h2 class="title">Create a new account</h2>
+  const gotoLoginPage = () => navigate("/login");
+
+  return(
+    <div>
+      <Navbar />
+      <div className="containers" >
+        <h2 className="title">Create a new account</h2>
         <form onSubmit={handleSubmit}>
-        
-            <div class="input-group">
-                <label for="email" class="label">Email:</label>
-                <input id="email" type="email" name="email" value={formData.email} onChange={handleChange}  class="input"></input>
-                {errors.email && <div className="error">{errors.email}</div>}
-            </div>
-        
-            <div class="input-group">
-                <label for="password" class="label">Password</label>
-                <input id="password" type="password" name="password" value={formData.password} onChange={handleChange} class="input"></input>
+          <div className="input-group">
+            <label htmlFor="username"  className="label">Username:</label>
+            <input id="username" type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)}  className="input" />
+            {errors.username && <div className="error">{errors.username}</div>}
+          </div>
+      
+          <div className="input-group">
+            <label htmlFor="email"  className="label">Email:</label>
+            <input id="email" type="email" name="email" value={email}  onChange={(e) => setEmail(e.target.value)}  className="input" />
+            {errors.email && <div className="error">{errors.email}</div>}
+          </div>
+      
+          <div className="input-group">
+            <label htmlFor="password"  className="label">Password</label>
+            <input id="password" type="password" name="password" value={password}  onChange={(e) => setPassword(e.target.value)} className="input" />
             {errors.password && <div className="error">{errors.password}</div>}
-            </div>
-        
-            <div class="input-group">
-                <label for="confirmPassword" class="label">Confirm Password:</label>
-                <input id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} type="password" class="input"></input>
-                {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-            </div>
-        
-            <button type="submit" class="button">Create account</button>
+          </div>
+      
+          <div className="input-group">
+            <label htmlFor="confirmPassword"  className="label">Confirm Password:</label>
+            <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
+            {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
+          </div>
+      
+          <button type="submit" className="button">SIGN UP</button>
         
         </form>
 
-        <div class="promo">👋  Have an account already? <Link className='link-to-login' to="/login" target="_blank">Log In</Link>.</div>
+        <div className="promo">
+          👋 Have an account already?{" "}
+          <span className='link-to-login' onClick={gotoLoginPage}>
+            Login
+          </span>
+        </div>
 
+      </div>
+      <Footer />
     </div>
   );
-};
 
-export default RegisterForm;
+};  
+
+export default Signup;

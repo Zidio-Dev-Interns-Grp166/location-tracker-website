@@ -134,17 +134,19 @@ cursor: pointer;
 }
 
 .header-login {
-background-color: var(--tertiary-color);
+background-color: yellowgreen;
 color: white;
 transition: 0.2s ease-in-out all;
 }
 
 .header-login:hover {
-background-color: var(--highlight-color);
+background-color: white;
+color: #000;
 }
 
 .header-signup:hover {
-background-color: var(--accent-color);
+background-color: yellowgreen;
+color: white;
 }
 
 @media screen and (max-width: 950px) {
@@ -456,7 +458,7 @@ transform: scaleX(1);
 
 .tracking-content{
     width: 50%;
-    height: 40px;
+    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between ;
@@ -471,6 +473,7 @@ transform: scaleX(1);
     border-radius: 20px;
     font-family: "Rubik", sans-serif;
     color: #ffffff;
+    text-align: center;
 }
 
 .previous-locations {

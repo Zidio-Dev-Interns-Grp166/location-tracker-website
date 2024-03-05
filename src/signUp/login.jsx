@@ -1,58 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
+import "./signUp.css"
 
-const LoginForm = ({ onLogin }) => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [errors, setErrors] = useState({});
+const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // If form is valid, call onLogin callback with form data
-      onLogin(formData);
-    }
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        validateForm();
 
-  const validateForm = () => {
-    let isValid = true;
-    const errors = {};
-
-    if (!formData.email.trim()) {
-      errors.email = 'Email is required';
-      isValid = false;
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
     }
 
-    if (!formData.password.trim()) {
-      errors.password = 'Password is required';
-      isValid = false;
-    }
+    const validateForm = () => {
+        let isValid = true;
+        const errors = {};
 
-    setErrors(errors);
-    return isValid;
-  };
+        if (!email.trim()) {
+            errors.email = 'Email is required';
+            isValid = false;
+        }
 
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-          {errors.email && <div className="error">{errors.email}</div>}
+        if (!password.trim()) {
+            errors.password = 'Password is required';
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            errors.confirmPassword = 'Passwords do not match';
+            isValid = false;
+        }
+
+        setErrors(errors);
+        return isValid;
+    };
+
+
+    const gotoSignUpPage = () => navigate("/signUp");
+
+
+    return (
+      <div>
+        <Navbar />
+        <div className='containers'>
+          <h2 className='title'>Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+                <label htmlFor="email"  className="label">Email:</label>
+                <input id="email" type="email" name="email" value={email}  onChange={(e) => setEmail(e.target.value)}  className="input" />
+                {errors.email && <div className="error">{errors.email}</div>}
+            </div>
+        
+            <div className="input-group">
+                <label htmlFor="password"  className="label">Password</label>
+                <input id="password" type="password" name="password" value={password}  onChange={(e) => setPassword(e.target.value)} className="input" />
+                {errors.password && <div className="error">{errors.password}</div>}
+            </div>
+        
+            <div className="input-group">
+                <label htmlFor="confirmPassword"  className="label">Confirm Password:</label>
+                <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
+                {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
+            </div>
+            <button className="button" type="submit">Login</button>
+          </form>
+
+          <div className="promo">
+            Don't have an account?{" "}
+            <span className='link-to-login' onClick={gotoSignUpPage}>
+                Sign up
+            </span>
+          </div>
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-          {errors.password && <div className="error">{errors.password}</div>}
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-};
+        <Footer />
+      </div>
+    );
 
-export default LoginForm;
+} 
+
+export default Login;
