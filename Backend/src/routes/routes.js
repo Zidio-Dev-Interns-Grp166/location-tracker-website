@@ -31,13 +31,13 @@ const tokenValidation = (isRefresh = false) => {
 routes.post(
     '/signup',
     [
-        body('name')
+        body('username')
             .trim()
             .not()
             .isEmpty()
-            .withMessage('Name must not be empty.')
+            .withMessage('Username must not be empty.')
             .isLength({ min: 3 })
-            .withMessage('Name must be at least 3 characters long')
+            .withMessage('Username must be at least 3 characters long')
             .escape(),
         body('email', 'Invalid email address.')
             .trim()

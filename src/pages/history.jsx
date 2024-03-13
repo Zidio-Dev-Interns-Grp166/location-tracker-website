@@ -1,4 +1,8 @@
+import  { useState } from "react";
+
 const History = () => {
+    const [history, setHistory] = useState([]);
+
 
     return ( 
         <div>

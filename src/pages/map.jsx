@@ -7,7 +7,6 @@ import L from 'leaflet';
 const MapWithTracking =  () => {
   const [map, setMap] = useState(null);
   const [position, setPosition] = useState(null);
-  const [history, setHistory] = useState([]);
   const [isTrackingPaused, setIsTrackingPaused] = useState(false);
   const watchIdRef = useRef(null);
   const navigate = useNavigate();

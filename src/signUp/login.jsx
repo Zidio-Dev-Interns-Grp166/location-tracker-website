@@ -12,41 +12,69 @@ const Login = () => {
     const navigate = useNavigate();
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        validateForm();
+    const postLoginDetails = () => {
+      fetch("http://localhost:3002/api/login", {
+          method: "POST",
+          body: JSON.stringify({
+              email,
+              password,
+              confirmPassword,
+          }),
+          headers: {
+              "Content-Type": "application/json",
+          },
+      })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error_message) {
+              alert(data.error_message);
+            } else {
+                //👇🏻 Logs the username to the console
+                console.log(data.data);
+                //👇🏻 save the username to the local storage
+                localStorage.setItem("username", data.data.username);
+                //👇🏻 Navigates to the 2FA route
+                navigate("/dashboard"); 
+            }
+          })
+          .catch((err) => console.error(err));
+    };
 
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      validateForm();
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      postLoginDetails();
     }
 
     const validateForm = () => {
-        let isValid = true;
-        const errors = {};
+      let isValid = true;
+      const errors = {};
 
-        if (!email.trim()) {
-            errors.email = 'Email is required';
-            isValid = false;
-        }
+      if (!email.trim()) {
+          errors.email = 'Email is required';
+          isValid = false;
+      }
 
-        if (!password.trim()) {
-            errors.password = 'Password is required';
-            isValid = false;
-        }
+      if (!password.trim()) {
+          errors.password = 'Password is required';
+          isValid = false;
+      }
 
-        if (password !== confirmPassword) {
-            errors.confirmPassword = 'Passwords do not match';
-            isValid = false;
-        }
+      if (password !== confirmPassword) {
+          errors.confirmPassword = 'Passwords do not match';
+          isValid = false;
+      }
 
-        setErrors(errors);
-        return isValid;
+      setErrors(errors);
+      return isValid;
     };
 
 
     const gotoSignUpPage = () => navigate("/signUp");
-
+    const gotoDashboard = () => navigate("/dashboard");
 
     return (
       <div>
@@ -71,7 +99,7 @@ const Login = () => {
                 <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
                 {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
             </div>
-            <button className="button" type="submit">Login</button>
+            <button className="button" onClick={gotoDashboard} type="submit">Login</button>
           </form>
 
           <div className="promo">

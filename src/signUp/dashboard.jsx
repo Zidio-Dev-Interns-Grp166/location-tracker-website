@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "../signUp/verification.css";
 
@@ -8,7 +8,7 @@ const Dashboard = () => {
     useEffect(() => {
         const checkUser = () => {
             if (!localStorage.getItem("username")) {
-                navigate("/");
+                navigate("/dashboard");
             }
         };
         checkUser();

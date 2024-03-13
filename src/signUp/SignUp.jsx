@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import './signUp.css';
 
-const Signup = ({ onRegister }) => {
+const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,10 +12,36 @@ const Signup = ({ onRegister }) => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const postSignUpDetails = () => {
+    fetch("http://localhost:3002/api/signUp", {
+        method: "POST",
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+            confirmPassword,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error_message) {
+            alert(data.error_message);
+          } else {
+            alert(data.message);
+            navigate("/");
+          }
+        })
+        .catch((err) => console.error(err));
+};
+
 
 
   const handleSubmit = (e) => {
       e.preventDefault();
+      postSignUpDetails();
       validateForm();
       setUsername("");
       setEmail("");
@@ -84,7 +110,7 @@ const Signup = ({ onRegister }) => {
             {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
           </div>
       
-          <button type="submit" className="button">SIGN UP</button>
+          <button type="submit" onClick={gotoLoginPage} className="button">SIGN UP</button>
         
         </form>
 
