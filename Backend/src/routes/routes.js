@@ -31,7 +31,7 @@ const tokenValidation = (isRefresh = false) => {
 routes.post(
     '/signup',
     [
-        body('username')
+        body('name')
             .trim()
             .not()
             .isEmpty()

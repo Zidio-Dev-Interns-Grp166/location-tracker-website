@@ -6,18 +6,20 @@ const port = process.env.PORT || 3002;
 
 // Middleware to parse JSON requests
 app.use(express.json());
+app.use(express.static("dist"));
  
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Welcome to the Location Tracker Backend Logic');
 });
 app.use('/api', routes);
-app.use((err, req, res) => {
+app.use((err, req, res,next) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || 'Internal Server Error';
     res.status(err.statusCode).json({
         message: err.message,
     });
 });
+
 
 // If database is connected successfully, then run the server
 dbConnection
