@@ -31,7 +31,7 @@ const Signup = () => {
             alert(data.error_message);
           } else {
             alert(data.message);
-            navigate("/");
+            navigate("/login");
           }
         })
         .catch((err) => console.error(err));
@@ -40,13 +40,13 @@ const Signup = () => {
 
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      postSignUpDetails();
-      validateForm();
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+    e.preventDefault();
+    postSignUpDetails();
+    validateForm();
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
 
   };
 
@@ -78,7 +78,7 @@ const Signup = () => {
       return isValid;
   };
 
-  const gotoLoginPage = () => navigate("/login");
+  //const gotoLoginPage = () => navigate("/login");
 
   return(
     <div>

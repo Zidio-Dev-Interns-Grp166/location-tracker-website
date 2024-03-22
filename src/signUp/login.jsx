@@ -74,7 +74,6 @@ const Login = () => {
 
 
     const gotoSignUpPage = () => navigate("/signUp");
-    const gotoDashboard = () => navigate("/dashboard");
 
     return (
       <div>
@@ -99,7 +98,7 @@ const Login = () => {
                 <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
                 {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
             </div>
-            <button className="button" onClick={gotoDashboard} type="submit">Login</button>
+            <button className="button"  type="submit">Login</button>
           </form>
 
           <div className="promo">

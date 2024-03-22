@@ -3,6 +3,9 @@ import  { useState } from "react";
 const History = () => {
     const [history, setHistory] = useState([]);
 
+    const latitude=
+
+    setHistory(prevHistory => [...prevHistory, { latitude, longitude, timestamp: new Date() }]);
 
     return ( 
         <div>

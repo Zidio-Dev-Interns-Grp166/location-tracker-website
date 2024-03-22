@@ -25,8 +25,8 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/verification' element={<PhoneVerify />} />
-          <Route path="/history" element={<History  />} history={history} onHistoryChange={setHistory} />
-          <Route path="/map"  element={<MapWithTracking />}  history={history} onHistoryChange={setHistory} />
+          <Route path="/history" element={<History  />}  />
+          <Route path="/map"  element={<MapWithTracking />}   />
         </Routes>
       </Router>
     </div>
