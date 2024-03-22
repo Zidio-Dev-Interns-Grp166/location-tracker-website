@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { createHash } from 'crypto';
-import { validationResult, matchedData } from 'express-validator';
+import { matchedData, validationResult} from 'express-validator';
 import { generateToken, verifyToken } from '../services/tokenHandler.js';
 import DB from '../config/dbConnection.js';
 
@@ -31,13 +31,30 @@ export const fetchUserByEmailOrID = async (data, isEmail = true) => {
 export default {
     signup: async (req, res, next) => {
         try {
-            const { name, email, password } = matchedData(req);
-
+            console.log(req.body);
+            
+            const { name, email, password, confirmPassword } = req.body
+            console.log('Password:', password);
+            console.log('ConfirmPassword:', confirmPassword);
+    
+            // Validate confirmPassword
+            if (password !== confirmPassword) {
+                return res.status(422).json({
+                    status: 422,
+                    message: 'Password do not match',
+                });
+            }
+    
+            if (!password) {
+                return res.status(422).json({
+                    status: 422,
+                    message: 'Password is required',
+                });
+            }
+    
             const saltRounds = 10;
-            // Hash the password
             const hashPassword = await bcrypt.hash(password, saltRounds);
-
-            // Store user data in the database
+    
             const [result] = await DB.execute(
                 'INSERT INTO `users` (`name`,`email`,`password`) VALUES (?,?,?)',
                 [name, email, hashPassword]
@@ -50,7 +67,9 @@ export default {
         } catch (err) {
             next(err);
         }
+        
     },
+    
 
     login: async (req, res, next) => {
         try {
