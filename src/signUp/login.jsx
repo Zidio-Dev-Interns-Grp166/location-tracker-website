@@ -65,32 +65,6 @@ const Login = () => {
     const gotoSignUpPage = () => navigate("/signUp");
 
     return (
-<<<<<<< HEAD
-      <div>
-        <Navbar />
-        <div className='containers'>
-          <h2 className='title'>Login</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-                <label htmlFor="email"  className="label">Email:</label>
-                <input id="email" type="email" name="email" value={email}  onChange={(e) => setEmail(e.target.value)}  className="input" />
-                {errors.email && <div className="error">{errors.email}</div>}
-            </div>
-        
-            <div className="input-group">
-                <label htmlFor="password"  className="label">Password</label>
-                <input id="password" type="password" name="password" value={password}  onChange={(e) => setPassword(e.target.value)} className="input" />
-                {errors.password && <div className="error">{errors.password}</div>}
-            </div>
-        
-            <div className="input-group">
-                <label htmlFor="confirmPassword"  className="label">Confirm Password:</label>
-                <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
-                {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-            </div>
-            <button className="button"  type="submit">Login</button>
-          </form>
-=======
         <div>
             <Navbar />
             <div className='containers'>
@@ -101,15 +75,22 @@ const Login = () => {
                         <input id="email" type="email" name="email" value={email}  onChange={(e) => setEmail(e.target.value)}  className="input" />
                         {errors.email && <div className="error">{errors.email}</div>}
                     </div>
->>>>>>> 4f3a8eadb0a5caaf2e6993d6e3036b07870b1228
-
+                
                     <div className="input-group">
                         <label htmlFor="password"  className="label">Password</label>
                         <input id="password" type="password" name="password" value={password}  onChange={(e) => setPassword(e.target.value)} className="input" />
                         {errors.password && <div className="error">{errors.password}</div>}
                     </div>
-                    <button className="button" type="submit">Login</button>
+                
+                    <div className="input-group">
+                        <label htmlFor="confirmPassword"  className="label">Confirm Password:</label>
+                        <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
+                        {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
+                    </div>
+                    <button className="button"  type="submit">Login</button>
                 </form>
+
+                        
 
                 <div className="promo">
                     Don't have an account?{" "}

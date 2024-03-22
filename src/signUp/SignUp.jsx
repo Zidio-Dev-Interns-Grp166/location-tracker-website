@@ -25,7 +25,6 @@ const Signup = () => {
         "Content-Type": "application/json",
       },
     })
-<<<<<<< HEAD
         .then((res) => res.json())
         .then((data) => {
           if (data.error_message) {
@@ -42,28 +41,6 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postSignUpDetails();
-    validateForm();
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-=======
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error_message) {
-          alert(data.error_message);
-        } else {
-          alert(data.message);
-          navigate("/");
-        }
-      })
-      .catch((err) => console.error(err));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
->>>>>>> 4f3a8eadb0a5caaf2e6993d6e3036b07870b1228
 
     // Validate the form
     const isValid = validateForm();
