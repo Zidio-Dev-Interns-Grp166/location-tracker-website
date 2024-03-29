@@ -82,11 +82,7 @@ const Login = () => {
                         {errors.password && <div className="error">{errors.password}</div>}
                     </div>
                 
-                    <div className="input-group">
-                        <label htmlFor="confirmPassword"  className="label">Confirm Password:</label>
-                        <input id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="input" />
-                        {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
-                    </div>
+                    
                     <button className="button"  type="submit">Login</button>
                 </form>
 

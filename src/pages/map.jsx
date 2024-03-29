@@ -9,6 +9,7 @@ const MapWithTracking =  () => {
   const [position, setPosition] = useState(null);
   const [isTrackingPaused, setIsTrackingPaused] = useState(false);
   const watchIdRef = useRef(null);
+  const [history, setHistory] = useState([]);
   const navigate = useNavigate();
 
   // Initialize the map

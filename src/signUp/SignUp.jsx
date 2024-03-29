@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import './signUp.css';
 
-const Signup = () => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +13,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const postSignUpDetails = () => {
-    fetch("http://localhost:3002/api/signUp", {
+    fetch("http://localhost:3002/api/signup", {
       method: "POST",
       body: JSON.stringify({
        name:username,
@@ -86,7 +86,7 @@ const Signup = () => {
     return isValid;
   };
 
-  //const gotoLoginPage = () => navigate("/login");
+  const gotoLoginPage = () => navigate("/login");
 
   return (
     <div>
@@ -135,4 +135,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
