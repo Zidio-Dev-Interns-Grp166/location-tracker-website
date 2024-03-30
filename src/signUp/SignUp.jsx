@@ -13,7 +13,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const postSignUpDetails = () => {
-    fetch("http://localhost:3002/api/signup", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signup`, {
       method: "POST",
       body: JSON.stringify({
        name:username,

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import "./signUp.css"
+import {config} from 'dotenv'
+config()
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -11,7 +13,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const postLoginDetails = () => {
-        fetch("http://localhost:3002/api/login", {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
             method: "POST",
             body: JSON.stringify({ email, password }),
             headers: {
